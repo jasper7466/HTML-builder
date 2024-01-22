@@ -1,5 +1,6 @@
 const fs = require('fs');
-const asyncFs = require('fs/promises');
+const fsPromises = require('fs/promises');
+const streamPromises = require('stream/promises');
 const path = require('path');
 
 const sourcesPath = path.join(__dirname, 'styles');
@@ -9,7 +10,7 @@ const writeStream = fs.createWriteStream(bundlePath);
 solution();
 
 async function solution() {
-  const files = await asyncFs.readdir(sourcesPath, { withFileTypes: true });
+  const files = await fsPromises.readdir(sourcesPath, { withFileTypes: true });
 
   for (const file of files) {
     if (path.extname(file.name) !== '.css') {
@@ -22,6 +23,8 @@ async function solution() {
       console.error(`Something went wrong: ${error}`),
     );
 
-    readStream.pipe(writeStream);
+    await streamPromises.pipeline(readStream, writeStream, { end: false });
   }
+
+  writeStream.close();
 }
