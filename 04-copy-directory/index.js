@@ -23,8 +23,8 @@ async function solution() {
 /**
  * Makes deep copy of directory, including nested directories.
  *
- * @param {*} srcRoot Absolute path to the source directory.
- * @param {*} destRoot Absolute path to the destination directory.
+ * @param {string} srcRoot Absolute path to the source directory.
+ * @param {string} destRoot Absolute path to the destination directory.
  */
 async function copyFiles(srcRoot, destRoot) {
   const stack = [''];
