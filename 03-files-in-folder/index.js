@@ -17,10 +17,15 @@ async function printFilesInfo(targetDirName) {
       const filePath = path.join(targetPath, file.name);
       const fileStat = await fs.stat(filePath);
 
+      const sizeString =
+        fileStat.size < 1000
+          ? `${fileStat.size} B`
+          : `${(fileStat.size / 1000).toFixed(1)} kB`;
+
       const fileInfo = {
         name: path.parse(filePath).name,
         extension: path.extname(file.name).split('.').pop(),
-        size: `${(fileStat.size / 1000).toFixed(1)} kB`,
+        size: sizeString,
       };
 
       print(fileInfo);
