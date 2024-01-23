@@ -220,7 +220,7 @@ class TemplateEngine extends Transform {
 
     this._openRegExp = new RegExp(openPattern, 'gim');
     this._closeRegExp = new RegExp(closePattern, 'gim');
-    this._entryRegExp = new RegExp(`${openPattern}(.+)${closePattern}`, 'gim');
+    this._entryRegExp = new RegExp(`${openPattern}(.+?)${closePattern}`, 'gim');
     this._buffer = '';
   }
 
