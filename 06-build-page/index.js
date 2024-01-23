@@ -253,7 +253,9 @@ class TemplateEngine extends Transform {
     const isUnclosedSequenceDetected = this._openRegExp.test(this._buffer);
 
     if (!isUnclosedSequenceDetected) {
-      return next(null, this._buffer);
+      const processed = this._buffer;
+      this._buffer = '';
+      return next(null, processed);
     }
 
     const index = this._buffer.search(this._openRegExp);
